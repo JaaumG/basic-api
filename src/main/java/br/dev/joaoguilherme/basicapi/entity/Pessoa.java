@@ -35,9 +35,9 @@ public class Pessoa {
     private LocalDate dataNascimento;
 
     @Enumerated(EnumType.STRING)
-    @NotNull(message = "O sexo é obrigatório")
-    @Column(name = "sexo", nullable = false)
-    private GeneroEnum sexo;
+    @NotNull(message = "O gênero é obrigatório")
+    @Column(name = "genero", nullable = false)
+    private GeneroEnum genero;
 
     @Column(name = "email")
     @Email(message = "O e-mail é inválido")
