@@ -9,9 +9,6 @@ import java.util.UUID;
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class NotFoundException extends RuntimeException {
 
-    @Serial
-    private static final long serialVersionUID = -1372371144598778934L;
-
     public NotFoundException(String entityName, Number id) {
         super(entityName + " com ID " + id + " não encontrado.");
     }
@@ -23,7 +20,6 @@ public class NotFoundException extends RuntimeException {
     public NotFoundException(String entityName, UUID id) {
         super(entityName + " com ID " + id.toString() + " não encontrado.");
     }
-
 
     public NotFoundException(String message) {
         super(message);

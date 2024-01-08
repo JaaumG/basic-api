@@ -10,11 +10,10 @@ import java.io.Serial;
  */
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class InvalidRequestException extends RuntimeException {
-    @Serial
-    private static final long serialVersionUID = -8356313341427220008L;
 
     public InvalidRequestException(String message) {
         super(message);
     }
+
 }
     

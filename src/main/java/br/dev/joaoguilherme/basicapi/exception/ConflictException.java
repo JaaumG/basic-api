@@ -10,11 +10,10 @@ import java.io.Serial;
  */
 @ResponseStatus(value = HttpStatus.CONFLICT)
 public class ConflictException extends RuntimeException {
-    @Serial
-    private static final long serialVersionUID = 5496003792165703924L;
 
     public ConflictException(String message) {
         super(message);
     }
+
 }
     

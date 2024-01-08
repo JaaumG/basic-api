@@ -10,11 +10,10 @@ import java.io.Serial;
  */
 @ResponseStatus(value = HttpStatus.CONFLICT)
 public class OptimisticLockingException extends RuntimeException {
-    @Serial
-    private static final long serialVersionUID = -7140942960998423137L;
 
     public OptimisticLockingException(String message) {
         super(message);
     }
+
 }
     

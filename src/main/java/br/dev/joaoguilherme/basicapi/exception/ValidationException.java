@@ -10,11 +10,10 @@ import java.io.Serial;
  */
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class ValidationException extends RuntimeException {
-    @Serial
-    private static final long serialVersionUID = -5308608816383562237L;
 
     public ValidationException(String message) {
         super(message);
     }
+
 }
     

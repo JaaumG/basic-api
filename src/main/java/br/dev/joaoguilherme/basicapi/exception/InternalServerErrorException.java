@@ -10,11 +10,10 @@ import java.io.Serial;
  */
 @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
 public class InternalServerErrorException extends RuntimeException {
-    @Serial
-    private static final long serialVersionUID = 553860816592886342L;
 
     public InternalServerErrorException(String message) {
         super(message);
     }
+
 }
     

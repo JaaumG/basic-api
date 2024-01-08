@@ -10,11 +10,10 @@ import java.io.Serial;
  */
 @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
 public class UnauthorizedException extends RuntimeException {
-    @Serial
-    private static final long serialVersionUID = 8182765340565991708L;
 
     public UnauthorizedException(String message) {
         super(message);
     }
+
 }
     

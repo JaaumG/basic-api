@@ -10,11 +10,10 @@ import java.io.Serial;
  */
 @ResponseStatus(value = HttpStatus.REQUEST_TIMEOUT)
 public class TimeoutException extends RuntimeException {
-    @Serial
-    private static final long serialVersionUID = -6119758018472023582L;
 
     public TimeoutException(String message) {
         super(message);
     }
+
 }
     

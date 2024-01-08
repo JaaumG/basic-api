@@ -10,11 +10,10 @@ import java.io.Serial;
  */
 @ResponseStatus(value = HttpStatus.BAD_GATEWAY)
 public class ExternalServiceException extends RuntimeException {
-    @Serial
-    private static final long serialVersionUID = 1679768946405686678L;
 
     public ExternalServiceException(String message) {
         super(message);
     }
+
 }
     

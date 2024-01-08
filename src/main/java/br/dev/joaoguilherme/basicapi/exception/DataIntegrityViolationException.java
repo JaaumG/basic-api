@@ -10,11 +10,10 @@ import java.io.Serial;
  */
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class DataIntegrityViolationException extends RuntimeException {
-    @Serial
-    private static final long serialVersionUID = -8012582234682977559L;
 
     public DataIntegrityViolationException(String message) {
         super(message);
     }
+
 }
     
