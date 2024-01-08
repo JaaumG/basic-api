@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @Validated
 @RestController
 @RequiredArgsConstructor
@@ -28,30 +30,35 @@ public class PessoaController {
     @GetMapping("/{id}")
     @Operation(summary = "Busca uma pessoa pelo id")
     public ResponseEntity<PessoaResponseDto> getPessoa(@Parameter(description = "Id da pessoa") @PathVariable Long id){
+        log.info("Buscando pessoa com id {}", id);
         return pessoaService.getPessoa(id);
     }
 
     @GetMapping("/")
     @Operation(summary = "Lista todas as pessoas")
     public ResponseEntity<Page<PessoaResponseDto>> listPessoas(@ParameterObject Pageable pageable){
+        log.info("Listando pessoas");
         return pessoaService.listPessoas(pageable);
     }
 
     @PostMapping("/")
     @Operation(summary = "Cria uma pessoa")
     public ResponseEntity<String> createPessoa(@RequestBody @Valid PessoaCreateDto pessoaCreateDto){
+        log.info("Criando {}", pessoaCreateDto.getNome());
         return pessoaService.createPessoa(pessoaCreateDto);
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Atualiza uma pessoa")
     public ResponseEntity<String> updatePessoa(@Parameter(description = "Id da pessoa") @PathVariable Long id, @RequestBody @Valid PessoaUpdateDto pessoaUpdateDto){
+        log.info("Atualizando pessoa com id {}", id);
         return pessoaService.updatePessoa(id, pessoaUpdateDto);
     }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Deleta uma pessoa")
     public ResponseEntity<String> deletePessoa(@Parameter(description = "Id da pessoa") @PathVariable Long id){
+        log.info("Deletando pessoa com id {}", id);
         return pessoaService.deletePessoa(id);
     }
 
