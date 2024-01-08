@@ -1,4 +1,4 @@
-package br.dev.joaoguilherme.basicapi.dto;
+package br.dev.joaoguilherme.basicapi.dto.request;
 
 import br.dev.joaoguilherme.basicapi.enums.Genero;
 import io.swagger.v3.oas.annotations.media.Schema;

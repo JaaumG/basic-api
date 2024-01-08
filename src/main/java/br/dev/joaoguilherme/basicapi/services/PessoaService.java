@@ -1,9 +1,9 @@
 package br.dev.joaoguilherme.basicapi.services;
 
-import br.dev.joaoguilherme.basicapi.dto.PessoaCreateDto;
-import br.dev.joaoguilherme.basicapi.dto.PessoaResponseDto;
+import br.dev.joaoguilherme.basicapi.dto.request.PessoaCreateDto;
+import br.dev.joaoguilherme.basicapi.dto.response.PessoaResponseDto;
 import br.dev.joaoguilherme.basicapi.entity.Pessoa;
-import br.dev.joaoguilherme.basicapi.dto.PessoaUpdateDto;
+import br.dev.joaoguilherme.basicapi.dto.request.PessoaUpdateDto;
 import br.dev.joaoguilherme.basicapi.exception.NotFoundException;
 import br.dev.joaoguilherme.basicapi.mappings.PessoaMapper;
 import br.dev.joaoguilherme.basicapi.repository.PessoaRepository;
@@ -16,8 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
-
-import java.util.Optional;
 
 @Service
 @Validated

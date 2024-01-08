@@ -1,8 +1,8 @@
 package br.dev.joaoguilherme.basicapi.controller;
 
-import br.dev.joaoguilherme.basicapi.dto.PessoaCreateDto;
-import br.dev.joaoguilherme.basicapi.dto.PessoaResponseDto;
-import br.dev.joaoguilherme.basicapi.dto.PessoaUpdateDto;
+import br.dev.joaoguilherme.basicapi.dto.request.PessoaCreateDto;
+import br.dev.joaoguilherme.basicapi.dto.response.PessoaResponseDto;
+import br.dev.joaoguilherme.basicapi.dto.request.PessoaUpdateDto;
 import br.dev.joaoguilherme.basicapi.entity.Pessoa;
 import br.dev.joaoguilherme.basicapi.services.PessoaService;
 import io.swagger.v3.oas.annotations.Operation;
