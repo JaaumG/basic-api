@@ -1,8 +1,8 @@
 package br.dev.joaoguilherme.basicapi.controller;
 
 import br.dev.joaoguilherme.basicapi.dto.request.PessoaCreateDto;
-import br.dev.joaoguilherme.basicapi.dto.response.PessoaResponseDto;
 import br.dev.joaoguilherme.basicapi.dto.request.PessoaUpdateDto;
+import br.dev.joaoguilherme.basicapi.dto.response.PessoaResponseDto;
 import br.dev.joaoguilherme.basicapi.entity.Pessoa;
 import br.dev.joaoguilherme.basicapi.services.PessoaService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,21 +35,21 @@ public class PessoaController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Busca uma pessoa pelo id")
-    public ResponseEntity<PessoaResponseDto> getPessoa(@Parameter(description = "Id da pessoa") @PathVariable Long id){
+    public ResponseEntity<PessoaResponseDto> getPessoa(@Parameter(description = "Id da pessoa") @PathVariable Long id) {
         log.info("Buscando pessoa com id {}", id);
         return ResponseEntity.ok(pessoaService.getPessoa(id));
     }
 
     @GetMapping("/")
     @Operation(summary = "Lista todas as pessoas")
-    public ResponseEntity<Page<PessoaResponseDto>> listPessoas(@ParameterObject Pageable pageable){
+    public ResponseEntity<Page<PessoaResponseDto>> listPessoas(@ParameterObject Pageable pageable) {
         log.info("Listando pessoas");
         return ResponseEntity.ok(pessoaService.listPessoas(pageable));
     }
 
     @PostMapping("/")
     @Operation(summary = "Cria uma pessoa")
-    public ResponseEntity<String> createPessoa(@RequestBody @Valid PessoaCreateDto pessoaCreateDto){
+    public ResponseEntity<String> createPessoa(@RequestBody @Valid PessoaCreateDto pessoaCreateDto) {
         log.info("Criando {}", pessoaCreateDto.getNome());
         Pessoa pessoaCriada = pessoaService.createPessoa(pessoaCreateDto);
         URI location = linkTo(methodOn(PessoaController.class).getPessoa(pessoaCriada.getId())).toUri();
@@ -59,7 +59,7 @@ public class PessoaController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Atualiza uma pessoa")
-    public ResponseEntity<Void> updatePessoa(@Parameter(description = "Id da pessoa") @PathVariable Long id, @RequestBody @Valid PessoaUpdateDto pessoaUpdateDto){
+    public ResponseEntity<Void> updatePessoa(@Parameter(description = "Id da pessoa") @PathVariable Long id, @RequestBody @Valid PessoaUpdateDto pessoaUpdateDto) {
         log.info("Atualizando pessoa com id {}", id);
         pessoaService.updatePessoa(id, pessoaUpdateDto);
         return ResponseEntity.noContent().build();
@@ -67,7 +67,7 @@ public class PessoaController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Deleta uma pessoa")
-    public ResponseEntity<Void> deletePessoa(@Parameter(description = "Id da pessoa") @PathVariable Long id){
+    public ResponseEntity<Void> deletePessoa(@Parameter(description = "Id da pessoa") @PathVariable Long id) {
         log.info("Deletando pessoa com id {}", id);
         pessoaService.deletePessoa(id);
         return ResponseEntity.noContent().build();
