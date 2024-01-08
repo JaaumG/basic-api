@@ -8,6 +8,9 @@ import br.dev.joaoguilherme.basicapi.exception.NotFoundException;
 import br.dev.joaoguilherme.basicapi.mappings.PessoaMapper;
 import br.dev.joaoguilherme.basicapi.repository.PessoaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -25,18 +28,21 @@ public class PessoaService {
     private final PessoaMapper mapper;
 
     @Transactional(rollbackFor = Exception.class)
+    @CachePut(value = "pessoaCache", key = "#result.id")
     public Pessoa createPessoa(PessoaCreateDto pessoaCreateDto){
         Pessoa pessoa = mapper.toEntity(pessoaCreateDto);
         return repository.saveAndFlush(pessoa);
     }
 
     @Transactional(readOnly = true)
+    @Cacheable(value = "pessoaCache", key = "#id")
     public PessoaResponseDto getPessoa(Long id){
         Pessoa pessoa = repository.findById(id).orElseThrow(() -> new NotFoundException("Pessoa", id));
         return mapper.toDto(pessoa);
     }
 
     @Transactional(rollbackFor = Exception.class)
+    @CachePut(value = "pessoaCache", key = "#id")
     public void updatePessoa(Long id, PessoaUpdateDto pessoaUpdateDto){
         Pessoa pessoa = repository.findById(id).orElseThrow(() -> new NotFoundException("Pessoa", id));
         pessoa = mapper.partialUpdate(pessoaUpdateDto, pessoa);
@@ -44,6 +50,7 @@ public class PessoaService {
     }
 
     @Transactional(rollbackFor = Exception.class)
+    @CacheEvict(value = "pessoaCache", key = "#id")
     public void deletePessoa(Long id){
         repository.deleteById(id);
     }
