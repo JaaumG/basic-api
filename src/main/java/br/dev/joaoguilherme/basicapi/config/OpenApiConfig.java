@@ -25,13 +25,13 @@ import io.swagger.v3.oas.annotations.servers.Server;
         },
         security = {
                 @SecurityRequirement(
-                        name = "Basic Authenticate"
+                        name = "Basic Authentication"
                 )
         }
 )
 @SecurityScheme(
-        name = "Basic Authenticate",
-        description = "Autorização do tipo 'Basic' use para usuário 'user' e para senha 'password'.",
+        name = "Basic Authentication",
+        description = "Autorização do tipo 'Basic' use para username 'user' e para password utilize 'password'.",
         type = SecuritySchemeType.HTTP,
         scheme = "basic"
 )
