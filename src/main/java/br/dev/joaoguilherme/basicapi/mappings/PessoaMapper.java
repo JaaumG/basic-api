@@ -3,7 +3,7 @@ package br.dev.joaoguilherme.basicapi.mappings;
 import br.dev.joaoguilherme.basicapi.dto.PessoaResponseDto;
 import br.dev.joaoguilherme.basicapi.entity.Pessoa;
 import br.dev.joaoguilherme.basicapi.dto.PessoaCreateDto;
-import br.dev.joaoguilherme.basicapi.entity.PessoaUpdateDto;
+import br.dev.joaoguilherme.basicapi.dto.PessoaUpdateDto;
 import org.mapstruct.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)

@@ -4,7 +4,7 @@ import br.dev.joaoguilherme.basicapi.controller.PessoaController;
 import br.dev.joaoguilherme.basicapi.dto.PessoaCreateDto;
 import br.dev.joaoguilherme.basicapi.dto.PessoaResponseDto;
 import br.dev.joaoguilherme.basicapi.entity.Pessoa;
-import br.dev.joaoguilherme.basicapi.entity.PessoaUpdateDto;
+import br.dev.joaoguilherme.basicapi.dto.PessoaUpdateDto;
 import br.dev.joaoguilherme.basicapi.mappings.PessoaMapper;
 import br.dev.joaoguilherme.basicapi.repository.PessoaRepository;
 import lombok.RequiredArgsConstructor;
