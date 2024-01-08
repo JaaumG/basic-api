@@ -1,6 +1,6 @@
 package br.dev.joaoguilherme.basicapi.dto.response;
 
-import br.dev.joaoguilherme.basicapi.enums.Genero;
+import br.dev.joaoguilherme.basicapi.enums.GeneroEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ public class PessoaResponseDto {
     private final LocalDate dataNascimento;
 
     @Schema(description = "Sexo da pessoa", example = "MASCULINO")
-    private final Genero sexo;
+    private final GeneroEnum sexo;
 
     @Schema(description = "E-mail da pessoa", example = "mail@joaoguilherme.dev")
     private final String email;

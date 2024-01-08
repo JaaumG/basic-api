@@ -1,6 +1,6 @@
 package br.dev.joaoguilherme.basicapi.entity;
 
-import br.dev.joaoguilherme.basicapi.enums.Genero;
+import br.dev.joaoguilherme.basicapi.enums.GeneroEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -37,7 +37,7 @@ public class Pessoa {
     @Enumerated(EnumType.STRING)
     @NotNull(message = "O sexo é obrigatório")
     @Column(name = "sexo", nullable = false)
-    private Genero sexo;
+    private GeneroEnum sexo;
 
     @Column(name = "email")
     @Email(message = "O e-mail é inválido")

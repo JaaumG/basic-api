@@ -1,6 +1,6 @@
 package br.dev.joaoguilherme.basicapi.dto.request;
 
-import br.dev.joaoguilherme.basicapi.enums.Genero;
+import br.dev.joaoguilherme.basicapi.enums.GeneroEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -27,7 +27,7 @@ public class PessoaCreateDto {
 
     @Schema(description = "Sexo da pessoa", example = "MASCULINO")
     @NotNull(message = "O sexo é obrigatório")
-    private final Genero sexo;
+    private final GeneroEnum sexo;
 
     @Schema(description = "E-mail da pessoa", example = "mail@joaoguilherme.dev")
     @Email(message = "O e-mail é inválido")
