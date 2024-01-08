@@ -43,9 +43,9 @@ public class Pessoa {
     @Email(message = "O e-mail é inválido")
     private String email;
 
-    @CPF
+    @CPF(message = "O CPF é inválido")
     @Column(name = "cpf", nullable = false)
-    @NotBlank(message = "O cpf é obrigatório")
+    @NotBlank(message = "O CPF é obrigatório")
     private String cpf;
 
 
