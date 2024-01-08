@@ -31,8 +31,9 @@ public class PessoaService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<PessoaResponseDto> getPessoa(Long id){
-        return repository.findById(id).map(mapper::toDto);
+    public PessoaResponseDto getPessoa(Long id){
+        Pessoa pessoa = repository.findById(id).orElseThrow(() -> new NotFoundException("Pessoa", id));
+        return mapper.toDto(pessoa);
     }
 
     @Transactional(rollbackFor = Exception.class)

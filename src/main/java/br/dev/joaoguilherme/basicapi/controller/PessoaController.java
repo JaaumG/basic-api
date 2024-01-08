@@ -37,9 +37,7 @@ public class PessoaController {
     @Operation(summary = "Busca uma pessoa pelo id")
     public ResponseEntity<PessoaResponseDto> getPessoa(@Parameter(description = "Id da pessoa") @PathVariable Long id){
         log.info("Buscando pessoa com id {}", id);
-        return pessoaService.getPessoa(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.noContent().build());
+        return ResponseEntity.ok(pessoaService.getPessoa(id));
     }
 
     @GetMapping("/")
