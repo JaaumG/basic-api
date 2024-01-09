@@ -24,8 +24,8 @@ public class PessoaResponseDto {
     @Schema(description = "Data de nascimento da pessoa", example = "2001-10-22")
     private final LocalDate dataNascimento;
 
-    @Schema(description = "Sexo da pessoa", example = "MASCULINO")
-    private final GeneroEnum sexo;
+    @Schema(description = "O gênero da pessoa", example = "MASCULINO")
+    private final GeneroEnum genero;
 
     @Schema(description = "E-mail da pessoa", example = "mail@joaoguilherme.dev")
     private final String email;
