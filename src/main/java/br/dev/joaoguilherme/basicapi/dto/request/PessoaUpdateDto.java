@@ -16,13 +16,11 @@ import lombok.Setter;
 @Schema(name = "Objeto de atualização de pessoa")
 public class PessoaUpdateDto {
 
-    @NotBlank(message = "O nome é obrigatório")
     @Schema(description = "Nome da pessoa", example = "João Guilherme")
     private final String nome;
 
-    @NotNull(message = "O sexo é obrigatório")
-    @Schema(description = "Data de nascimento da pessoa", example = "2001-10-22")
-    private final GeneroEnum sexo;
+    @Schema(description = "O gênero da pessoa", example = "MASCULINO")
+    private final GeneroEnum genero;
 
     @Email(message = "O e-mail é inválido")
     @Schema(description = "E-mail da pessoa", example = "mail@joaoguilherme.dev")
