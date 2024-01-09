@@ -27,9 +27,10 @@ public class PessoaService {
 
     @Transactional(rollbackFor = Exception.class)
     @CachePut(value = "pessoaCache", key = "#result.id")
-    public Pessoa createPessoa(PessoaCreateDto pessoaCreateDto) {
+    public PessoaResponseDto createPessoa(PessoaCreateDto pessoaCreateDto) {
         Pessoa pessoa = mapper.toEntity(pessoaCreateDto);
-        return repository.saveAndFlush(pessoa);
+        pessoa = repository.saveAndFlush(pessoa);
+        return mapper.toDto(pessoa);
     }
 
     @Transactional(readOnly = true)
@@ -41,10 +42,11 @@ public class PessoaService {
 
     @Transactional(rollbackFor = Exception.class)
     @CachePut(value = "pessoaCache", key = "#id")
-    public void updatePessoa(Long id, PessoaUpdateDto pessoaUpdateDto) {
+    public PessoaResponseDto updatePessoa(Long id, PessoaUpdateDto pessoaUpdateDto) {
         Pessoa pessoa = repository.findById(id).orElseThrow(() -> new NotFoundException("Pessoa", id));
         pessoa = mapper.partialUpdate(pessoaUpdateDto, pessoa);
-        repository.saveAndFlush(pessoa);
+        pessoa = repository.saveAndFlush(pessoa);
+        return mapper.toDto(pessoa);
     }
 
     @Transactional(rollbackFor = Exception.class)
