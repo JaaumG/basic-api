@@ -51,7 +51,7 @@ public class PessoaController {
     @Operation(summary = "Cria uma pessoa")
     public ResponseEntity<String> createPessoa(@RequestBody @Valid PessoaCreateDto pessoaCreateDto) {
         log.info("Criando {}", pessoaCreateDto.getNome());
-        Pessoa pessoaCriada = pessoaService.createPessoa(pessoaCreateDto);
+        PessoaResponseDto pessoaCriada = pessoaService.createPessoa(pessoaCreateDto);
         URI location = linkTo(methodOn(PessoaController.class).getPessoa(pessoaCriada.getId())).toUri();
         return ResponseEntity.created(location).body("Pessoa criada com sucesso");
     }
