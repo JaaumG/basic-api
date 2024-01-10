@@ -14,15 +14,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.List;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
+
 
 @Slf4j
 @Validated
@@ -36,49 +35,48 @@ public class PessoaController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Busca uma pessoa pelo id")
-    public ResponseEntity<PessoaResponseDto> getPessoa(@Parameter(description = "Id da pessoa") @PathVariable Long id) {
+    public PessoaResponseDto getPessoa(@Parameter(description = "Id da pessoa") @PathVariable Long id) {
         log.info("Buscando pessoa com id {}", id);
-        return ResponseEntity.ok(pessoaService.getPessoa(id));
+        return pessoaService.getPessoa(id);
     }
 
     @GetMapping("/")
     @Operation(summary = "Lista todas as pessoas")
-    public ResponseEntity<Page<PessoaResponseDto>> listPessoas(@ParameterObject Pageable pageable) {
+    public Page<PessoaResponseDto> listPessoas(@ParameterObject Pageable pageable) {
         log.info("Listando pessoas");
-        return ResponseEntity.ok(pessoaService.listPessoas(pageable));
+        return pessoaService.listPessoas(pageable);
     }
 
     @GetMapping("/find")
     @Operation(summary = "Busca uma pessoa pelos seus atributos")
-    public ResponseEntity<List<PessoaResponseDto>> findPessoa(@ParameterObject PessoaFilterDto pessoaFilter){
+    public List<PessoaResponseDto> findPessoa(@ParameterObject PessoaFilterDto pessoaFilter){
         log.info("Buscando pessoa com os atributos {}", pessoaFilter);
-        return ResponseEntity.ok(pessoaService.findPessoas(pessoaFilter));
+        return pessoaService.findPessoas(pessoaFilter);
     }
 
     @PostMapping("/")
+    @ResponseStatus(CREATED)
     @Operation(summary = "Cria uma pessoa")
-    public ResponseEntity<String> createPessoa(@RequestBody @Valid PessoaCreateDto pessoaCreateDto) {
+    public PessoaResponseDto createPessoa(@RequestBody @Valid PessoaCreateDto pessoaCreateDto) {
         log.info("Criando {}", pessoaCreateDto.getNome());
-        PessoaResponseDto pessoaCriada = pessoaService.createPessoa(pessoaCreateDto);
-        URI location = linkTo(methodOn(PessoaController.class).getPessoa(pessoaCriada.getId())).toUri();
-        return ResponseEntity.created(location).body("Pessoa criada com sucesso");
+        return pessoaService.createPessoa(pessoaCreateDto);
     }
 
 
     @PutMapping("/{id}")
+    @ResponseStatus(NO_CONTENT)
     @Operation(summary = "Atualiza uma pessoa")
-    public ResponseEntity<Void> updatePessoa(@Parameter(description = "Id da pessoa") @PathVariable Long id, @RequestBody @Valid PessoaUpdateDto pessoaUpdateDto) {
+    public void updatePessoa(@Parameter(description = "Id da pessoa") @PathVariable Long id, @RequestBody @Valid PessoaUpdateDto pessoaUpdateDto) {
         log.info("Atualizando pessoa com id {}", id);
         pessoaService.updatePessoa(id, pessoaUpdateDto);
-        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(NO_CONTENT)
     @Operation(summary = "Deleta uma pessoa")
-    public ResponseEntity<Void> deletePessoa(@Parameter(description = "Id da pessoa") @PathVariable Long id) {
+    public void deletePessoa(@Parameter(description = "Id da pessoa") @PathVariable Long id) {
         log.info("Deletando pessoa com id {}", id);
         pessoaService.deletePessoa(id);
-        return ResponseEntity.noContent().build();
     }
 
 }
