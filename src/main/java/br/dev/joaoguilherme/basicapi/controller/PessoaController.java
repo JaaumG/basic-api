@@ -1,9 +1,9 @@
 package br.dev.joaoguilherme.basicapi.controller;
 
+import br.dev.joaoguilherme.basicapi.dto.request.PessoaFilterDto;
 import br.dev.joaoguilherme.basicapi.dto.request.PessoaCreateDto;
 import br.dev.joaoguilherme.basicapi.dto.request.PessoaUpdateDto;
 import br.dev.joaoguilherme.basicapi.dto.response.PessoaResponseDto;
-import br.dev.joaoguilherme.basicapi.entity.Pessoa;
 import br.dev.joaoguilherme.basicapi.services.PessoaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -19,6 +19,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -45,6 +46,13 @@ public class PessoaController {
     public ResponseEntity<Page<PessoaResponseDto>> listPessoas(@ParameterObject Pageable pageable) {
         log.info("Listando pessoas");
         return ResponseEntity.ok(pessoaService.listPessoas(pageable));
+    }
+
+    @GetMapping("/find")
+    @Operation(summary = "Busca uma pessoa pelos seus atributos")
+    public ResponseEntity<List<PessoaResponseDto>> findPessoa(@ParameterObject PessoaFilterDto pessoaFilter){
+        log.info("Buscando pessoa com os atributos {}", pessoaFilter);
+        return ResponseEntity.ok(pessoaService.findPessoas(pessoaFilter));
     }
 
     @PostMapping("/")
