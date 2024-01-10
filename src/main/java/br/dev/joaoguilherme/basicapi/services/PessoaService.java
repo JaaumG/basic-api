@@ -1,5 +1,6 @@
 package br.dev.joaoguilherme.basicapi.services;
 
+import br.dev.joaoguilherme.basicapi.dto.request.PessoaFilterDto;
 import br.dev.joaoguilherme.basicapi.dto.request.PessoaCreateDto;
 import br.dev.joaoguilherme.basicapi.dto.request.PessoaUpdateDto;
 import br.dev.joaoguilherme.basicapi.dto.response.PessoaResponseDto;
@@ -11,11 +12,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
+
+import java.util.List;
 
 @Service
 @Validated
@@ -60,4 +65,10 @@ public class PessoaService {
         return repository.findAll(pageable).map(mapper::toDto);
     }
 
+    @Transactional(readOnly = true)
+    public List<PessoaResponseDto> findPessoas(PessoaFilterDto filter) {
+        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        List<Pessoa> pessoa = repository.findAll(Example.of(mapper.toEntity(filter), matcher));
+        return pessoa.stream().map(mapper::toDto).toList();
+    }
 }
