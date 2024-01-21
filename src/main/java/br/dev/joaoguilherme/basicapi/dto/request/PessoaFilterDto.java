@@ -2,15 +2,9 @@ package br.dev.joaoguilherme.basicapi.dto.request;
 
 import br.dev.joaoguilherme.basicapi.enums.GeneroEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
 @Schema(name = "Objeto de pesquisa de pessoas")
 public class PessoaFilterDto {
     @Schema(description = "Id da pessoa", example = "1")
@@ -25,4 +19,41 @@ public class PessoaFilterDto {
     private final String email;
     @Schema(description = "CPF da pessoa", example = "123.456.789-10")
     private final String cpf;
+
+    public PessoaFilterDto(Long id, String nome, LocalDate dataNascimento, GeneroEnum genero, String email, String cpf) {
+        this.id = id;
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
+        this.genero = genero;
+        this.email = email;
+        this.cpf = cpf;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public String getNome() {
+        return this.nome;
+    }
+
+    public LocalDate getDataNascimento() {
+        return this.dataNascimento;
+    }
+
+    public GeneroEnum getGenero() {
+        return this.genero;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public String getCpf() {
+        return this.cpf;
+    }
+
+    public String toString() {
+        return "PessoaFilterDto(id=" + this.getId() + ", nome=" + this.getNome() + ", dataNascimento=" + this.getDataNascimento() + ", genero=" + this.getGenero() + ", email=" + this.getEmail() + ", cpf=" + this.getCpf() + ")";
+    }
 }

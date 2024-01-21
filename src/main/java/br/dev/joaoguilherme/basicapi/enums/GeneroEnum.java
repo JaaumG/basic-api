@@ -1,10 +1,6 @@
 package br.dev.joaoguilherme.basicapi.enums;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
-@Getter
-@RequiredArgsConstructor
 public enum GeneroEnum {
 
     MASCULINO("Masculino"),
@@ -13,4 +9,11 @@ public enum GeneroEnum {
 
     private final String descricao;
 
+    GeneroEnum(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getDescricao() {
+        return this.descricao;
+    }
 }

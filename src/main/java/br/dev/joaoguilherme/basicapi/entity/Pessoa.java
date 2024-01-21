@@ -5,19 +5,13 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Getter
-@Setter
 @Entity
-@ToString
-@AllArgsConstructor
-@RequiredArgsConstructor
 @Table(name = "pessoa", indexes = {
         @Index(name = "idx_pessoa_email", columnList = "email")
 }, uniqueConstraints = {
@@ -52,6 +46,66 @@ public class Pessoa {
     @NotBlank(message = "O CPF é obrigatório")
     private String cpf;
 
+    public Pessoa() {
+    }
+
+    public Pessoa(Long id, @NotBlank(message = "O nome é obrigatório") String nome, @NotNull(message = "A data de nascimento é obrigatória") LocalDate dataNascimento, @NotNull(message = "O gênero é obrigatório") GeneroEnum genero, @Email(message = "O e-mail é inválido") String email, @CPF(message = "O CPF é inválido") @NotBlank(message = "O CPF é obrigatório") String cpf) {
+        this.id = id;
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
+        this.genero = genero;
+        this.email = email;
+        this.cpf = cpf;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public @NotBlank(message = "O nome é obrigatório") String getNome() {
+        return this.nome;
+    }
+
+    public @NotNull(message = "A data de nascimento é obrigatória") LocalDate getDataNascimento() {
+        return this.dataNascimento;
+    }
+
+    public @NotNull(message = "O gênero é obrigatório") GeneroEnum getGenero() {
+        return this.genero;
+    }
+
+    public @Email(message = "O e-mail é inválido") String getEmail() {
+        return this.email;
+    }
+
+    public @CPF(message = "O CPF é inválido") @NotBlank(message = "O CPF é obrigatório") String getCpf() {
+        return this.cpf;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setNome(@NotBlank(message = "O nome é obrigatório") String nome) {
+        this.nome = nome;
+    }
+
+    public void setDataNascimento(@NotNull(message = "A data de nascimento é obrigatória") LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public void setGenero(@NotNull(message = "O gênero é obrigatório") GeneroEnum genero) {
+        this.genero = genero;
+    }
+
+    public void setEmail(@Email(message = "O e-mail é inválido") String email) {
+        this.email = email;
+    }
+
+    public void setCpf(@CPF(message = "O CPF é inválido") @NotBlank(message = "O CPF é obrigatório") String cpf) {
+        this.cpf = cpf;
+    }
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;
@@ -66,6 +120,11 @@ public class Pessoa {
     @Override
     public final int hashCode() {
         return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "Pessoa(id=" + this.getId() + ", nome=" + this.getNome() + ", dataNascimento=" + this.getDataNascimento() + ", genero=" + this.getGenero() + ", email=" + this.getEmail() + ", cpf=" + this.getCpf() + ")";
     }
 
 }

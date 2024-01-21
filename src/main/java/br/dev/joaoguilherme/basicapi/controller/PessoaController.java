@@ -1,7 +1,7 @@
 package br.dev.joaoguilherme.basicapi.controller;
 
-import br.dev.joaoguilherme.basicapi.dto.request.PessoaFilterDto;
 import br.dev.joaoguilherme.basicapi.dto.request.PessoaCreateDto;
+import br.dev.joaoguilherme.basicapi.dto.request.PessoaFilterDto;
 import br.dev.joaoguilherme.basicapi.dto.request.PessoaUpdateDto;
 import br.dev.joaoguilherme.basicapi.dto.response.PessoaResponseDto;
 import br.dev.joaoguilherme.basicapi.services.PessoaService;
@@ -9,8 +9,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,15 +24,18 @@ import java.util.List;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-@Slf4j
 @Validated
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("api/v1/pessoa")
 @Tag(name = "Pessoa", description = "Controller para operações relacionadas a pessoas")
 public class PessoaController {
 
+    private static final Logger log = LoggerFactory.getLogger(PessoaController.class);
     private final PessoaService pessoaService;
+
+    public PessoaController(PessoaService pessoaService) {
+        this.pessoaService = pessoaService;
+    }
 
     @GetMapping("/{id}")
     @Operation(summary = "Busca uma pessoa pelo id")
@@ -50,7 +53,7 @@ public class PessoaController {
 
     @GetMapping("/find")
     @Operation(summary = "Busca uma pessoa pelos seus atributos")
-    public ResponseEntity<List<PessoaResponseDto>> findPessoa(@ParameterObject PessoaFilterDto pessoaFilter){
+    public ResponseEntity<List<PessoaResponseDto>> findPessoa(@ParameterObject PessoaFilterDto pessoaFilter) {
         log.info("Buscando pessoa com os atributos {}", pessoaFilter);
         return ResponseEntity.ok(pessoaService.findPessoas(pessoaFilter));
     }

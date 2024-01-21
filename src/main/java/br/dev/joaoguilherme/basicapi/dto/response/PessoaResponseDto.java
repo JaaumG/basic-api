@@ -2,16 +2,10 @@ package br.dev.joaoguilherme.basicapi.dto.response;
 
 import br.dev.joaoguilherme.basicapi.enums.GeneroEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDate;
 
 
-@Getter
-@Setter
-@RequiredArgsConstructor
 @Schema(name = "Objeto de resposta de pessoa")
 public class PessoaResponseDto {
 
@@ -33,4 +27,37 @@ public class PessoaResponseDto {
     @Schema(description = "CPF da pessoa", example = "123.456.789-10")
     private final String cpf;
 
+
+    public PessoaResponseDto(Long id, String nome, LocalDate dataNascimento, GeneroEnum genero, String email, String cpf) {
+        this.id = id;
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
+        this.genero = genero;
+        this.email = email;
+        this.cpf = cpf;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public String getNome() {
+        return this.nome;
+    }
+
+    public LocalDate getDataNascimento() {
+        return this.dataNascimento;
+    }
+
+    public GeneroEnum getGenero() {
+        return this.genero;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public String getCpf() {
+        return this.cpf;
+    }
 }

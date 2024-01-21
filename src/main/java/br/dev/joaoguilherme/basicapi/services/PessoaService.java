@@ -1,14 +1,13 @@
 package br.dev.joaoguilherme.basicapi.services;
 
-import br.dev.joaoguilherme.basicapi.dto.request.PessoaFilterDto;
 import br.dev.joaoguilherme.basicapi.dto.request.PessoaCreateDto;
+import br.dev.joaoguilherme.basicapi.dto.request.PessoaFilterDto;
 import br.dev.joaoguilherme.basicapi.dto.request.PessoaUpdateDto;
 import br.dev.joaoguilherme.basicapi.dto.response.PessoaResponseDto;
 import br.dev.joaoguilherme.basicapi.entity.Pessoa;
 import br.dev.joaoguilherme.basicapi.exception.NotFoundException;
 import br.dev.joaoguilherme.basicapi.mappings.PessoaMapper;
 import br.dev.joaoguilherme.basicapi.repository.PessoaRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -24,11 +23,15 @@ import java.util.List;
 
 @Service
 @Validated
-@RequiredArgsConstructor
 public class PessoaService {
 
     private final PessoaRepository repository;
     private final PessoaMapper mapper;
+
+    public PessoaService(PessoaRepository repository, PessoaMapper mapper) {
+        this.repository = repository;
+        this.mapper = mapper;
+    }
 
     @Transactional(rollbackFor = Exception.class)
     @CachePut(value = "pessoaCache", key = "#result.id")
