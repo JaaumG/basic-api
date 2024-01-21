@@ -17,68 +17,70 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.*;
+
 @ControllerAdvice
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(InvalidRequestException.class)
     public ResponseEntity<String> handleInvalidRequestException(InvalidRequestException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        return ResponseEntity.status(BAD_REQUEST).body(e.getMessage());
     }
 
-    @ResponseStatus(HttpStatus.CONFLICT)
+    @ResponseStatus(CONFLICT)
     @ExceptionHandler(ConflictException.class)
     public ResponseEntity<String> handleConflictException(ConflictException e) {
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        return ResponseEntity.status(CONFLICT).body(e.getMessage());
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<String> handleDataIntegrityViolationException(DataIntegrityViolationException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        return ResponseEntity.status(BAD_REQUEST).body(e.getMessage());
     }
 
-    @ResponseStatus(HttpStatus.CONFLICT)
+    @ResponseStatus(CONFLICT)
     @ExceptionHandler(OptimisticLockingException.class)
     public ResponseEntity<String> handleOptimisticLockingException(OptimisticLockingException e) {
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        return ResponseEntity.status(CONFLICT).body(e.getMessage());
     }
 
-    @ResponseStatus(HttpStatus.BAD_GATEWAY)
+    @ResponseStatus(BAD_GATEWAY)
     @ExceptionHandler(ExternalServiceException.class)
     public ResponseEntity<String> handleExternalServiceException(ExternalServiceException e) {
-        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(e.getMessage());
+        return ResponseEntity.status(BAD_GATEWAY).body(e.getMessage());
     }
 
-    @ResponseStatus(HttpStatus.REQUEST_TIMEOUT)
+    @ResponseStatus(REQUEST_TIMEOUT)
     @ExceptionHandler(TimeoutException.class)
     public ResponseEntity<String> handleTimeoutException(TimeoutException e) {
-        return ResponseEntity.status(HttpStatus.REQUEST_TIMEOUT).body(e.getMessage());
+        return ResponseEntity.status(REQUEST_TIMEOUT).body(e.getMessage());
     }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<String> handleResourceNotFoundException(NotFoundException e) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        return ResponseEntity.status(NOT_FOUND).body(e.getMessage());
     }
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(INTERNAL_SERVER_ERROR)
     @ExceptionHandler(InternalServerErrorException.class)
     public ResponseEntity<String> handleInternalServerErrorException(InternalServerErrorException e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(ValidationException.class)
     public ResponseEntity<String> handleValidationException(ValidationException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        return ResponseEntity.status(BAD_REQUEST).body(e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(INTERNAL_SERVER_ERROR)
     public ResponseEntity<String> handleGenericException(Exception e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocorreu um erro inesperado.");
+        return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("Ocorreu um erro inesperado.");
     }
 
     @Override
