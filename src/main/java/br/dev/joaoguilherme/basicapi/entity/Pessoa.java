@@ -18,7 +18,11 @@ import java.util.Objects;
 @ToString
 @AllArgsConstructor
 @RequiredArgsConstructor
-@Table(name = "pessoa")
+@Table(name = "pessoa", indexes = {
+        @Index(name = "idx_pessoa_email", columnList = "email")
+}, uniqueConstraints = {
+        @UniqueConstraint(name = "uk_pessoa_cpf", columnNames = {"cpf"})
+})
 public class Pessoa {
 
     @Id
