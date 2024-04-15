@@ -1,6 +1,7 @@
 package br.dev.joaoguilherme.basicapi.config;
 
 import br.dev.joaoguilherme.basicapi.exception.*;
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.ValidationException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
@@ -19,7 +20,7 @@ import java.util.List;
 
 import static org.springframework.http.HttpStatus.*;
 
-@ControllerAdvice
+@Hidden
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
